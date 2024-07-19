@@ -47,6 +47,13 @@
     </dependencies>
 
     <build>
+
+        <resources>
+            <resource>
+                <directory>${project.build.directory}/lib</directory>
+            </resource>
+        </resources>
+
         <plugins>
             <!-- Usual compilation -->
             <plugin>
@@ -73,17 +80,14 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
-                <version>3.2.0</version>
+                <version>3.3.0</version>
                 <configuration>
-                    <outputDirectory>
-                        ${project.build.directory}/lib/
-                    </outputDirectory>
+                    <outputDirectory>${project.build.directory}/lib</outputDirectory>
                     <includeScope>compile</includeScope>
                 </configuration>
                 <executions>
                     <execution>
-                        <id>copy-dependencies</id>
-                        <phase>package</phase>
+                        <phase>generate-resources</phase>
                         <goals>
                             <goal>copy-dependencies</goal>
                         </goals>
@@ -95,7 +99,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>3.3.0</version>
+                <version>2.4</version>
                 <configuration>
                     <archive>
                         <manifest>
@@ -104,9 +108,8 @@
                         </manifest>
                         <manifestEntries>
                             <Rsrc-Main-Class>com.javarush.games.racer.RacerGame</Rsrc-Main-Class>
-                            <Class-Path>./</Class-Path>>
+                            <Class-Path>./</Class-Path>
                         </manifestEntries>
-                        >
                     </archive>
                 </configuration>
             </plugin>
@@ -115,7 +118,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-install-plugin</artifactId>
-                <version>2.5.2</version>
+                <version>2.4</version>
             </plugin>
 
             <!-- Run java-fx app over Maven -->
