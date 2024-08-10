@@ -1,22 +1,24 @@
 
-Задание: Нужно сделать исполняемый JAR-файл с игрой на JavaFX через графический движок от JavaRush.<br />
-Для этого нужно:
+https://javarush.com/quests/lectures/jru.module3.lecture00
+
+# Задание: Нужно сделать исполняемый JAR-файл с игрой на JavaFX через графический движок от JavaRush.<br />
+### Для этого нужно:
 
 1. Сделать fork из репозитория https://github.com/vasylmalik/project-maven.git <br />
 2. Скачать свою версию проекта к себе на компьютер. Дальше будем работать с файлом pom.xml. <br />
-3. Добавить зависимости: <br />
-org.apache.commons: commons-lang3: 3.12.0 <br />
-org.openjfx: javafx-controls: 18.0.1 <br />
-com.javarush: desktop-game-engine:1.0 (об этой зависимости будет отдельное задание) <br />
-org.junit.jupiter: junit-jupiter-engine: 5.8.2 (с scope test) <br />
-4. Добавить плагины для: <br />
-установки зависимости com.javarush: desktop-game-engine:1.0 из библиотеки lib в локальный репозиторий (google в помощь);<br />
-плагин maven-compiler-plugin оставить без изменений;<br />
-плагин, который соберет все зависимости (с scope compile) и сложит в какую-то директорию при сборке;<br />
-плагин maven-jar-plugin, который сделает jar файл, содержащий код игры и зависимости. В этом плагине нужно сконфигурировать файл MANIFEST.MF, чтоб он содержал секции: Class-Path, Main-Class и Rsrc-Main-Class<br />
-В Class-Path должны быть прописаны все наши JAR-зависимости.<br />
-В Main-Class должен быть прописан класс org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader, который умеет использовать classpath из JAR-файлов, а также умеет стартовать приложение на JavaFX.<br />
-В Rsrc-Main-Class должен быть прописан стартовый класс игры (com.javarush.games.racer.RacerGame).<br />
+3. Добавить зависимости:
+   - org.apache.commons: commons-lang3: 3.12.0 
+   - org.openjfx: javafx-controls: 18.0.1 
+   - com.javarush: desktop-game-engine:1.0 (об этой зависимости будет отдельное задание) 
+   - org.junit.jupiter: junit-jupiter-engine: 5.8.2 (с scope test) <br />
+4. Добавить плагины для: 
+   - установки зависимости com.javarush: desktop-game-engine:1.0 из библиотеки lib в локальный репозиторий (google в помощь);
+   - плагин maven-compiler-plugin оставить без изменений;
+   - плагин, который соберет все зависимости (с scope compile) и сложит в какую-то директорию при сборке;
+   - плагин maven-jar-plugin, который сделает jar файл, содержащий код игры и зависимости. В этом плагине нужно сконфигурировать файл MANIFEST.MF, чтоб он содержал секции: `Class-Path`, `Main-Class` и `Rsrc-Main-Class`
+   - В `Class-Path` должны быть прописаны все наши JAR-зависимости.
+   - В `Main-Class` должен быть прописан класс `org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader`, который умеет использовать classpath из JAR-файлов, а также умеет стартовать приложение на JavaFX.
+   - В `Rsrc-Main-Class` должен быть прописан стартовый класс игры (com.javarush.games.racer.RacerGame).<br />
 5. В плагине maven-surefire-plugin сделать конфигурацию, чтоб тест StrangeTest не запускался при сборке. Остальные тесты должны выполняться.<br />
 6. Добавить секцию “resources”, в которой сказать, что собранные JAR-зависимости это ресурс, чтоб плагин maven-jar-plugin сложил их внутрь JAR-файла в папку lib/  <br />
 7. Залить изменения в свой GitHub-репозиторий, отправить ссылку на него преподавателю.
@@ -30,4 +32,11 @@ org.junit.jupiter: junit-jupiter-engine: 5.8.2 (с scope test) <br />
 5. При билде через Maven сперва будут ошибки. Читай их внимательно и ты упростишь себе жизнь.<br />
 6. В пакете org.eclipse.jdt.internal.jarinjarloader ничего не изменяй. В нем кастомный класс-лоадер (честно скопированный с StackOverflow), в котором изменен запуск метода main на запуск JavaFX приложения. Использовать только в учебных целях.<br />
 7. Если выполнить все пункты, в результате сборки ты получишь fat-JAR-файл. Запустить и проверить, что все сделано правильно можно командой:<br />
-   <путь к java 18> -jar <имя результирующего jar файла> //Пример  "C:\Users\leo12\.jdks\openjdk-18.0.1.1\bin\java.exe" -jar "E:\temp\project-maven-1.0.jar"
+   ```
+   <путь к java 18> -jar <имя результирующего jar файла>
+   //Пример
+   "C:\Users\leo12\.jdks\openjdk-18.0.1.1\bin\java.exe" -jar "E:\temp\project-maven-1.0.jar"
+   ```
+8. В результате ты увидишь: <br />
+   ![](https://cdn.javarush.com/images/article/c0b2cb6c-8d36-4ef0-84be-e2d4e6295ab4/512.webp)
+9. Билд зависит от твоей операционной системы. То есть, если JAR-файл собран на Windows, его можно выполнить на любом компе с Windows и Java18. И нельзя выполнить на Mac и Linux.
