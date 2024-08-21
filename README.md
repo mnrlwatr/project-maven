@@ -1,7 +1,8 @@
 
-https://javarush.com/quests/lectures/jru.module3.lecture00
+# **Проект по теме: Maven**
+https://javarush.com/quests/lectures/jru.module3.lecture00 <br />
 
-# Задание: Нужно сделать исполняемый JAR-файл с игрой на JavaFX через графический движок от JavaRush.<br />
+## Задание: Нужно сделать исполняемый JAR-файл с игрой на JavaFX через графический движок от JavaRush.<br />
 ### Для этого нужно:
 
 1. Сделать fork из репозитория https://github.com/vasylmalik/project-maven.git <br />
